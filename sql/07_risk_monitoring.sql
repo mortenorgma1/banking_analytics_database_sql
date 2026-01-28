@@ -1,0 +1,21 @@
+/*
+Finds active customers with low total balances.
+Useful for monitoring at-risk accounts.
+*/
+
+
+SELECT
+	CONCAT(C.FIRST_NAME, ' ', C.LAST_NAME) AS CUSTOMER_NAME,
+	SUM(A.BALANCE) AS TOTAL_BALANCE
+FROM
+	CUSTOMERS C
+	JOIN ACCOUNTS A ON C.CUSTOMER_ID = A.CUSTOMER_ID
+WHERE
+	STATUS = 'Active'
+GROUP BY
+	C.FIRST_NAME,
+	C.LAST_NAME
+HAVING
+	SUM(A.BALANCE) < 1000
+ORDER BY
+	TOTAL_BALANCE

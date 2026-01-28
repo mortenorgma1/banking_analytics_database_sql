@@ -1,0 +1,16 @@
+/*
+Analyses daily transaction activity.
+Returns total transactions and total amount per day.
+*/
+
+
+SELECT
+	T.TRANSACTION_DATE,
+	COUNT(T.TRANSACTION_ID) AS TOTAL_TRANSACTIONS,
+	SUM(T.AMOUNT) AS TOTAL_TRANSACTION_AMOUNT
+FROM
+	TRANSACTIONS T
+GROUP BY
+	T.TRANSACTION_DATE
+ORDER BY
+	T.TRANSACTION_DATE
